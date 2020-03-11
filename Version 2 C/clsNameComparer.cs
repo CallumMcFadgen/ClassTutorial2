@@ -6,7 +6,11 @@ namespace Version_2_C
     public sealed class clsNameComparer : IComparer<clsWork>
     {
         //Singleton pattern
-        private clsNameComparer() {}
+        private clsNameComparer()
+        {
+        
+        }
+
         public static readonly clsNameComparer Instance = new clsNameComparer();
 
         public int Compare(clsWork x, clsWork y)

@@ -6,7 +6,11 @@ namespace Version_2_C
     public sealed class clsDateComparer : IComparer<clsWork>
     {
         //Singleton pattern
-        private clsDateComparer() {}
+        private clsDateComparer() 
+        {
+        
+        }
+
         public static readonly clsDateComparer Instance = new clsDateComparer();
 
         public int Compare(clsWork x, clsWork y)
