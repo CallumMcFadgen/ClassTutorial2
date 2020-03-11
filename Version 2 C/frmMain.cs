@@ -3,12 +3,16 @@ using System.Windows.Forms;
 
 namespace Version_2_C
 {
-    public partial class frmMain : Form
+    public sealed partial class frmMain : Form
     {
+        //Singleton pattern
         public frmMain()
         {
             InitializeComponent();
         }
+
+        private static readonly frmMain _Instance = new frmMain();
+        public static frmMain Instance => _Instance;
 
         private clsArtistList _ArtistList = new clsArtistList();
 
