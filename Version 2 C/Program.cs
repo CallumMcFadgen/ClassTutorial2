@@ -17,6 +17,8 @@ namespace Version_2_C
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             clsPainting.LoadPaintingForm = new clsPainting.LoadPaintingFormDelegate(frmPainting.Run);
+            clsPhotograph.LoadPhotographForm = new clsPhotograph.LoadPhotographFormDelegate(frmPhotograph.Run);
+
             Application.Run(frmMain.Instance);
         }
     }
