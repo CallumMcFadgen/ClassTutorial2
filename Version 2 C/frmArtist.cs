@@ -15,6 +15,8 @@ namespace Version_2_C
         private clsWorksList _WorksList;
         private static Dictionary<clsArtist, frmArtist> _ArtistFormList = new Dictionary<clsArtist, frmArtist>();
 
+
+        //Observer pattern
         public static void Run(clsArtist prArtist)
         {
             frmArtist lcArtistForm;
@@ -34,7 +36,6 @@ namespace Version_2_C
 
         private void updateDisplay()
         {
-            txtName.Enabled = txtName.Text == "";
             if (_WorksList.SortOrder == 0)
             {
                 _WorksList.SortByName();
@@ -54,6 +55,7 @@ namespace Version_2_C
         public void SetDetails(clsArtist prArtist)
         {
             _Artist = prArtist;
+            txtName.Enabled = string.IsNullOrEmpty(_Artist.Name);
             updateForm();
             updateDisplay();
             Show();
@@ -82,6 +84,7 @@ namespace Version_2_C
             {
                 _WorksList.RemoveAt(lcIndex);
                 updateDisplay();
+                frmMain.Instance.UpdateDisplay();
             }
         }
 
@@ -92,16 +95,29 @@ namespace Version_2_C
             {
                 _WorksList.AddWork(lcReply[0]);
                 updateDisplay();
+                frmMain.Instance.UpdateDisplay();
             }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
             if (isValid() == true)
-            {
-                pushData();
-                Hide();
-            }
+                try
+                {
+                    pushData();
+                    if (txtName.Enabled)
+                    {
+                        _Artist.NewArtist();
+                        MessageBox.Show("Artist added!", "Success");
+                        frmMain.Instance.UpdateDisplay();
+                        txtName.Enabled = false;
+                    }
+                    Hide();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
         }
 
         private Boolean isValid()
@@ -124,6 +140,7 @@ namespace Version_2_C
             {
                 _WorksList.EditWork(lstWorks.SelectedIndex);
                 updateDisplay();
+                frmMain.Instance.UpdateDisplay();
             }
             catch (Exception ex)
             {

@@ -16,7 +16,7 @@ namespace Version_2_C
 
         private clsArtistList _ArtistList = new clsArtistList();
 
-        private void updateDisplay()
+        public void UpdateDisplay()
         {
             lstArtists.DataSource = null;
             string[] lcDisplayList = new string[_ArtistList.Count];
@@ -76,7 +76,7 @@ namespace Version_2_C
                 {
                     _ArtistList.Remove(lcKey);
                     lstArtists.ClearSelected();
-                    updateDisplay();
+                    UpdateDisplay();
 
                 }
                 catch (Exception ex)
@@ -96,7 +96,7 @@ namespace Version_2_C
             {
                 MessageBox.Show(ex.Message, "File retrieve error");
             }
-            updateDisplay();
+            UpdateDisplay();
         }
     }
 }

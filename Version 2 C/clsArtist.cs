@@ -17,6 +17,18 @@ namespace Version_2_C
 
         public clsArtist() { }
 
+        public void NewArtist()
+        {
+            if (!string.IsNullOrEmpty(Name))
+            {
+                _ArtistList.Add(Name, this);
+            }
+            else
+            {
+                throw new Exception("No artist name entered");
+            }
+        }
+
         public clsArtist(clsArtistList prArtistList)
         {
             _WorksList = new clsWorksList();
@@ -48,7 +60,7 @@ namespace Version_2_C
 
         public decimal TotalValue
         {
-            get { return _TotalValue; }
+            get { return _WorksList.GetTotalValue(); }
         }
 
         public clsWorksList WorksList
