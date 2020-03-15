@@ -9,7 +9,7 @@ namespace Version_2_C
         private float _Height;
         private string _Type;
 
-        public delegate void LoadPhotographFormDelegate(clsPhotograph prphotograph);
+        public delegate void LoadPhotographFormDelegate(clsPhotograph prPhotograph);
         public static LoadPhotographFormDelegate LoadPhotographForm;
 
         public override void EditDetails()

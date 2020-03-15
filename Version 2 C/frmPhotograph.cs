@@ -10,6 +10,7 @@ namespace Version_2_C
 
         public static readonly frmPhotograph Instance = new frmPhotograph(); 
 
+        //Oserver pattern
         public static void Run(clsPhotograph prPhotograph)
         {
             Instance.SetDetails(prPhotograph);

@@ -10,6 +10,12 @@ namespace Version_2_C
 
         public static readonly frmSculpture Instance = new frmSculpture();
 
+        //Observer pattern
+        public static void Run(clsSculpture prSculpture)
+        {
+            Instance.SetDetails(prSculpture);
+        }
+
         protected override void updateForm()
         {
             base.updateForm();

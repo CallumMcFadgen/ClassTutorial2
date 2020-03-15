@@ -10,6 +10,7 @@ namespace Version_2_C
 
         public static readonly frmPainting Instance = new frmPainting();
 
+        //Observer pattern
         public static void Run(clsPainting prPainting)
         {
             Instance.SetDetails(prPainting);
