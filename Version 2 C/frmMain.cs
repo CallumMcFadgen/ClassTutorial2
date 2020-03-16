@@ -114,5 +114,11 @@ namespace Version_2_C
             GalleryNameChanged += new Notify(updateTitle);
             GalleryNameChanged(_ArtistList.GalleryName);
         }
+
+        private void btnGalleryNameChange_Click(object sender, EventArgs e)
+        {
+            _ArtistList.GalleryName = txtName.Text;
+            GalleryNameChanged(_ArtistList.GalleryName);
+        }
     }
 }
