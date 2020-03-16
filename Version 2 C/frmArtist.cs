@@ -21,7 +21,7 @@ namespace Version_2_C
         {
             frmArtist lcArtistForm;
 
-            if(!_ArtistFormList.TryGetValue(prArtist, out lcArtistForm))
+            if (!_ArtistFormList.TryGetValue(prArtist, out lcArtistForm))
             {
                 lcArtistForm = new frmArtist();
                 _ArtistFormList.Add(prArtist, lcArtistForm);
@@ -33,6 +33,15 @@ namespace Version_2_C
                 lcArtistForm.Activate();
             }
         }
+
+        private void updateTitle(string prArtistDetails)
+        {
+            if (!string.IsNullOrEmpty(prArtistDetails))
+            {
+                Text = "Artist Details - " + prArtistDetails;
+            }
+        }
+
 
         private void updateDisplay()
         {
@@ -59,6 +68,9 @@ namespace Version_2_C
             updateForm();
             updateDisplay();
             Show();
+            frmMain.Instance.GalleryNameChanged += new frmMain.Notify(updateTitle);
+            updateTitle(_Artist.ArtistList.GalleryName);
+
         }
 
         private void updateForm()
