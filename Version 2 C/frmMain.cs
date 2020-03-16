@@ -16,6 +16,18 @@ namespace Version_2_C
 
         private clsArtistList _ArtistList = new clsArtistList();
 
+        //Observer Pattern
+        public delegate void Notify(string prGalleryName);
+        public event Notify GalleryNameChanged;
+
+        private void updateTitle(string prGalleryName)
+        {
+            if(!string.IsNullOrEmpty(prGalleryName))
+            {
+                Text = "Gallery - " + prGalleryName;
+            }
+        }
+
         public void UpdateDisplay()
         {
             lstArtists.DataSource = null;
@@ -43,6 +55,7 @@ namespace Version_2_C
 
             lcKey = Convert.ToString(lstArtists.SelectedItem);
             if (lcKey != null)
+            {
                 try
                 {
                     frmArtist.Run(_ArtistList[lcKey]);      
@@ -51,6 +64,7 @@ namespace Version_2_C
                 {
                     MessageBox.Show(ex.Message, "This should never occur");
                 }
+            }
         }
 
         private void btnQuit_Click(object sender, EventArgs e)
@@ -72,17 +86,18 @@ namespace Version_2_C
 
             lcKey = Convert.ToString(lstArtists.SelectedItem);
             if (lcKey != null && MessageBox.Show("Are you sure?", "Deleting artist", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
                 try
                 {
                     _ArtistList.Remove(lcKey);
                     lstArtists.ClearSelected();
                     UpdateDisplay();
-
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Error deleing artist");
                 }
+            }
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -90,13 +105,14 @@ namespace Version_2_C
             try
             {
                 _ArtistList = clsArtistList.RetrieveArtistList();
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "File retrieve error");
             }
             UpdateDisplay();
+            GalleryNameChanged += new Notify(updateTitle);
+            GalleryNameChanged(_ArtistList.GalleryName);
         }
     }
 }
